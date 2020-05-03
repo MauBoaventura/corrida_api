@@ -6,18 +6,24 @@ const routes = express.Router()
 // const ProfileController = require('./controllers/ProfileController')
 // const SessionController = require('./controllers/SessionController')
 
-//Atletas
-routes.get('/atleta', SessionController.create)
-routes.post('/atleta', SessionController.create)
-routes.post('/atualiza/:id', SessionController.create)
-routes.delete('/atleta/:id', SessionController.create)
+//Corredores
+routes.get('/corredor', SessionController.index)
+routes.get('/corredor/:id', SessionController.index)
+routes.post('/corredor', SessionController.create)
+routes.put('/corredor/:id', SessionController.create)
+routes.delete('/corredor/:id', SessionController.create)
 
+//Etapas
+routes.get('/etapa', SessionController.index)
+routes.get('/etapa/:id', SessionController.index)
+routes.post('/etapa', SessionController.create)
+routes.put('/etapa/:id', SessionController.create)
+routes.post('/inicio/:id', SessionController.create)
+routes.post('/zerar/:id', SessionController.create)
 
 //Corrida
-routes.post('/inicio', SessionController.create)
-routes.post('/config', SessionController.create)
-routes.post('/chegada', SessionController.create)
-routes.post('/zerar', SessionController.create)
+routes.post('/chegada/:id', SessionController.create)
+routes.post('/qualifica/:id', SessionController.create)
 routes.post('/desqualifica/:id', SessionController.create)
 
 //Relatorios
@@ -26,11 +32,6 @@ routes.get('/relatorio/competidores', OngsController.index)
 routes.get('/relatorio/categoria', OngsController.index)
 
 
-
-routes.get('/incidents', IncidentsController.index)
-routes.post('/incidents', IncidentsController.create)
-routes.delete('/incidents/:id', IncidentsController.delete)
-
-routes.get('/profile', ProfileController.index)
+// routes.get('/profile', ProfileController.index)
 
 module.exports = routes
