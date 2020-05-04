@@ -1,5 +1,5 @@
 exports.up = function (knex, Promise) {
-    return knex.schema.createTable('corredores', function (table) {
+    return knex.schema.createTable('runners', function (table) {
         table.increments().primary();
         table.string('name').notNullable();
         table.integer('age').notNullable();
@@ -12,5 +12,5 @@ exports.up = function (knex, Promise) {
 };
 
 exports.down = function (knex, Promise) {
-    return knex.schema.dropTable('corredores')
+    return knex.schema.dropTable('runners')
 };
