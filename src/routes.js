@@ -3,8 +3,6 @@ const routes = express.Router()
 
 const RunnerController = require('./controllers/RunnerController')
 const StageController = require('./controllers/StageController')
-// const ProfileController = require('./controllers/ProfileController')
-// const SessionController = require('./controllers/SessionController')
 
 //Corredores
 routes.get('/corredor', RunnerController.index)
@@ -19,10 +17,12 @@ routes.get('/etapa/:id', StageController.get)
 routes.post('/etapa', StageController.create)
 routes.put('/etapa/:id', StageController.update)
 routes.delete('/etapa/:id', StageController.delete)
+
+
+routes.get('/time/:id', StageController.time)
 routes.post('/inicio/:id', StageController.inicio)
 routes.post('/zerar/:id', StageController.zerar)
 
-routes.get('/teste', StageController.teste)
 // //Corrida
 // routes.post('/chegada/:id', SessionController.create)
 // routes.post('/qualifica/:id', SessionController.create)

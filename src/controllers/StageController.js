@@ -84,6 +84,23 @@ module.exports = {
 
     },
 
+    async time(req, res) {
+        const id = req.params.id;
+
+        const stage = await connection('stages')
+            .select("*")
+            .where("id", id)
+            .first()
+
+        if (stage == undefined)
+            return res.status(401).json({
+                error: "Stage not exist"
+            })
+
+        res.status(200).json({ start: stage.start })
+
+    },
+
     async inicio(req, res) {
         const id = req.params.id;
 
@@ -97,12 +114,11 @@ module.exports = {
                 error: "Stage not exist"
             })
 
-        await connection('stages').where("id", id).update({ start: moment(Date.now()).format("DD-MM-YYYY") })
+        await connection('stages').where("id", id).update({ start: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss.SSS') })
 
         res.status(200).json({
-            text: moment(Date.now()).format("DD-MM-YYYY")
+            start: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss.SSS')
         })
-
     },
 
     async zerar(req, res) {
@@ -118,16 +134,9 @@ module.exports = {
                 error: "Stage not exist"
             })
 
-        await connection('stages').where("id", id).update(req.body)
+        await connection('stages').where("id", id).update({ start: null })
 
-        res.status(204).send()
-
-    },
-
-    async teste(req, res) {
-        res.json({
-            start: moment(Date.now()).format()
-        })
+        res.status(200).send()
 
     }
 
