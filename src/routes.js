@@ -1,25 +1,25 @@
 const express = require('express')
 const routes = express.Router()
 
-const CorredorController = require('./controllers/CorredorController')
-// const IncidentsController = require('./controllers/IncidentsController')
+const RunnerController = require('./controllers/RunnerController')
+const StageController = require('./controllers/StageController')
 // const ProfileController = require('./controllers/ProfileController')
 // const SessionController = require('./controllers/SessionController')
 
 //Corredores
-routes.get('/corredor', CorredorController.index)
-routes.get('/corredor/:id', CorredorController.get)
-routes.post('/corredor', CorredorController.create)
-routes.put('/corredor/:id', CorredorController.update)
-routes.delete('/corredor/:id', CorredorController.delete)
+routes.get('/corredor', RunnerController.index)
+routes.get('/corredor/:id', RunnerController.get)
+routes.post('/corredor', RunnerController.create)
+routes.put('/corredor/:id', RunnerController.update)
+routes.delete('/corredor/:id', RunnerController.delete)
 
 //Etapas
-// routes.get('/etapa', SessionController.index)
-// routes.get('/etapa/:id', SessionController.index)
-// routes.post('/etapa', SessionController.create)
-// routes.put('/etapa/:id', SessionController.create)
-// routes.post('/inicio/:id', SessionController.create)
-// routes.post('/zerar/:id', SessionController.create)
+routes.get('/etapa', StageController.index)
+routes.get('/etapa/:id', StageController.get)
+routes.post('/etapa', StageController.create)
+routes.put('/etapa/:id', StageController.update)
+routes.post('/inicio/:id', StageController.create)
+routes.post('/zerar/:id', StageController.create)
 
 // //Corrida
 // routes.post('/chegada/:id', SessionController.create)

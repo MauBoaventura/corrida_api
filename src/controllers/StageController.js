@@ -1,0 +1,86 @@
+const crypto = require('crypto')
+const connection = require('../database/connection')
+
+module.exports = {
+    async index(req, res) {
+        const {
+            page = 1
+        } = req.query
+
+        const [count] = await connection('stages').count()
+        const dados = await connection('stages')
+            .limit(5)
+            .offset((page - 1) * 5)
+            .select("*")
+        res.header('X-Total-Count', count['count(*)'])
+
+        res.json(dados)
+    },
+
+    async get(req, res) {
+        const id = req.params.id;
+
+        const dados = await connection('stages')
+            .select("*")
+            .where("id", id)
+
+        res.json(dados)
+    },
+
+    async create(req, res) {
+        const {
+            name,
+            city,
+            uf,
+        } = req.body
+
+        const [id] = await connection('stages').insert({
+            name,
+            city,
+            uf,
+        })
+
+        res.json({
+            id
+        })
+    },
+
+    async delete(req, res) {
+        const id = req.params.id;
+
+        const stage = await connection('stages')
+            .select("*")
+            .where("id", id)
+            .first()
+        console.log(stage)
+
+        if (stage == undefined)
+            return res.status(401).json({
+                error: "Stage not exist"
+            })
+
+        await connection('stages').where("id", id).delete()
+
+        res.status(204).send()
+    },
+
+    async update(req, res) {
+        const id = req.params.id;
+
+        const stage = await connection('stages')
+            .select("*")
+            .where("id", id)
+            .first()
+
+        if (stage == undefined)
+            return res.status(401).json({
+                error: "Stage not exist"
+            })
+
+        await connection('stages').where("id", id).update(req.body)
+
+        res.status(204).send()
+
+    }
+
+};
