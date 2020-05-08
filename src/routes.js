@@ -22,6 +22,7 @@ routes.delete('/etapa/:id', StageController.delete)
 routes.post('/inicio/:id', StageController.inicio)
 routes.post('/zerar/:id', StageController.zerar)
 
+routes.get('/teste', StageController.teste)
 // //Corrida
 // routes.post('/chegada/:id', SessionController.create)
 // routes.post('/qualifica/:id', SessionController.create)

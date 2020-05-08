@@ -10,7 +10,7 @@ exports.up = function (knex, Promise) {
 
         table.string('km').notNullable();
         table.string('number').notNullable();
-        table.datetime('totaltime', { precision: 2 })
+        table.datetime('totaltime')
         table.boolean('isQualify').notNullable().defaultTo('false');
         table.timestamps()
 

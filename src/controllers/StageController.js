@@ -1,4 +1,5 @@
 const crypto = require('crypto')
+const moment = require('moment')
 const connection = require('../database/connection')
 
 module.exports = {
@@ -96,14 +97,14 @@ module.exports = {
                 error: "Stage not exist"
             })
 
-        await connection('stages').where("id", id).update({ start: Date.now() })
+        await connection('stages').where("id", id).update({ start: moment(Date.now()).format("DD-MM-YYYY") })
 
         res.status(200).json({
-            text: Date.now()
+            text: moment(Date.now()).format("DD-MM-YYYY")
         })
 
     },
-    
+
     async zerar(req, res) {
         const id = req.params.id;
 
@@ -120,6 +121,13 @@ module.exports = {
         await connection('stages').where("id", id).update(req.body)
 
         res.status(204).send()
+
+    },
+
+    async teste(req, res) {
+        res.json({
+            start: moment(Date.now()).format()
+        })
 
     }
 
