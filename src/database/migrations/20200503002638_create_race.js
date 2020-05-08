@@ -12,6 +12,8 @@ exports.up = function (knex, Promise) {
         table.string('number').notNullable();
         table.datetime('totaltime', { precision: 2 })
         table.boolean('isQualify').notNullable().defaultTo('false');
+        table.timestamps()
+
     })
 };
 

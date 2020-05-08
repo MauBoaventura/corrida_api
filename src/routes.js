@@ -18,8 +18,9 @@ routes.get('/etapa', StageController.index)
 routes.get('/etapa/:id', StageController.get)
 routes.post('/etapa', StageController.create)
 routes.put('/etapa/:id', StageController.update)
-routes.post('/inicio/:id', StageController.create)
-routes.post('/zerar/:id', StageController.create)
+routes.delete('/etapa/:id', StageController.delete)
+routes.post('/inicio/:id', StageController.inicio)
+routes.post('/zerar/:id', StageController.zerar)
 
 // //Corrida
 // routes.post('/chegada/:id', SessionController.create)

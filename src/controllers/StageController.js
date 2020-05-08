@@ -52,7 +52,7 @@ module.exports = {
             .select("*")
             .where("id", id)
             .first()
-        console.log(stage)
+        console.log("Entrou aqui :" + stage)
 
         if (stage == undefined)
             return res.status(401).json({
@@ -65,6 +65,46 @@ module.exports = {
     },
 
     async update(req, res) {
+        const id = req.params.id;
+
+        const stage = await connection('stages')
+            .select("*")
+            .where("id", id)
+            .first()
+
+        if (stage == undefined)
+            return res.status(401).json({
+                error: "Stage not exist"
+            })
+
+        await connection('stages').where("id", id).update(req.body)
+
+        res.status(204).send()
+
+    },
+
+    async inicio(req, res) {
+        const id = req.params.id;
+
+        const stage = await connection('stages')
+            .select("*")
+            .where("id", id)
+            .first()
+
+        if (stage == undefined)
+            return res.status(401).json({
+                error: "Stage not exist"
+            })
+
+        await connection('stages').where("id", id).update({ start: Date.now() })
+
+        res.status(200).json({
+            text: Date.now()
+        })
+
+    },
+    
+    async zerar(req, res) {
         const id = req.params.id;
 
         const stage = await connection('stages')

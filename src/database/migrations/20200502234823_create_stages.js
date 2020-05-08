@@ -5,6 +5,8 @@ exports.up = function (knex, Promise) {
         table.string('city');
         table.string('uf');
         table.datetime('start');
+        table.timestamps()
+
     })
 };
 
