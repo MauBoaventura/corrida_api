@@ -97,7 +97,8 @@ module.exports = {
                 error: "Stage not exist"
             })
 
-        res.status(200).json({ start: stage.start })
+            stage.created_at
+        res.status(200).json(stage)
 
     },
 
@@ -114,10 +115,10 @@ module.exports = {
                 error: "Stage not exist"
             })
 
-        await connection('stages').where("id", id).update({ start: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss.SSS') })
+        await connection('stages').where("id", id).update({ start: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss') })
 
         res.status(200).json({
-            start: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss.SSS')
+            start: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')
         })
     },
 

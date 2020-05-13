@@ -1,3 +1,5 @@
+const { onUpdateTrigger } = require('../../../knexfile')
+
 exports.up = function (knex, Promise) {
     return knex.schema.createTable('runners', function (table) {
         table.increments().primary();
@@ -8,7 +10,9 @@ exports.up = function (knex, Promise) {
         table.string('whatsapp');
         table.string('city');
         table.string('uf');
-        table.timestamps()
+        table.timestamp('created_at').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'))
+        table.timestamp('updated_at').defaultTo(knex.raw('NULL ON UPDATE CURRENT_TIMESTAMP'))
+
     })
 };
 

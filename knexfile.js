@@ -8,8 +8,18 @@ module.exports = {
       host: '127.0.0.1',
       user: 'root',
       password: 'password',
-      database: 'corrida'
+      database: 'corrida',
+      timezone: 'utc'
     },
+    // pool: {
+    //   min: 2,
+    //   max: 10,
+    //   afterCreate: function (conn, cb) {
+    //     conn.query('SET timezone="UTC";', function (err) {
+    //       cb(err, conn);
+    //     });
+    //   }
+    // },
     migrations: {
       directory: './src/database/migrations'
     }
@@ -19,7 +29,7 @@ module.exports = {
     client: 'postgresql',
     connection: {
       database: 'my_db',
-      user:     'username',
+      user: 'username',
       password: 'password'
     },
     pool: {
@@ -35,7 +45,7 @@ module.exports = {
     client: 'postgresql',
     connection: {
       database: 'my_db',
-      user:     'username',
+      user: 'username',
       password: 'password'
     },
     pool: {
@@ -45,6 +55,6 @@ module.exports = {
     migrations: {
       tableName: 'knex_migrations'
     }
-  }
+  },
 
 };
