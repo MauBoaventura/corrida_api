@@ -3,6 +3,7 @@ const routes = express.Router()
 
 const RunnerController = require('./controllers/RunnerController')
 const StageController = require('./controllers/StageController')
+const RaceController = require('./controllers/RaceController')
 
 //Corredores
 routes.get('/corredor', RunnerController.index)
@@ -18,13 +19,16 @@ routes.post('/etapa', StageController.create)
 routes.put('/etapa/:id', StageController.update)
 routes.delete('/etapa/:id', StageController.delete)
 
-
+//Tempo
 routes.get('/time/:id', StageController.time)
 routes.post('/inicio/:id', StageController.inicio)
 routes.post('/zerar/:id', StageController.zerar)
 
 // //Corrida
-// routes.post('/chegada/:id', SessionController.create)
+/*
+    Header: idStage
+*/
+routes.post('/chegada/:numero', RaceController.chegada)
 // routes.post('/qualifica/:id', SessionController.create)
 // routes.post('/desqualifica/:id', SessionController.create)
 

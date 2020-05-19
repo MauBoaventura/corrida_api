@@ -13,6 +13,6 @@ app.use(routes)
 
 app.listen(3030, () => {
     console.log("Servidor rodando");
-    d = new Date();
-    console.log("" +d)
+    // d = new Date();
+    // console.log("" +d)
 })
