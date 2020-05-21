@@ -33,7 +33,7 @@ module.exports = {
         const stage_id = req.header('idStage');
         const runner_id = req.header('idRunner');
 
-        var { number = 0, km = 0, isQualify } = req.body
+        var { km } = req.body
 
 
         //Verifica se o id da etapa existe
@@ -63,8 +63,6 @@ module.exports = {
             stage_id,
             runner_id,
             km,
-            number,
-            isQualify
         })
 
 

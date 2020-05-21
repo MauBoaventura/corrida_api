@@ -11,7 +11,7 @@ exports.up = function (knex, Promise) {
         table.foreign('runner_id').references('id').inTable('runners')
 
         table.string('km').notNullable();
-        table.string('number').notNullable();
+        table.string('number');
         table.datetime('totaltime')
         table.boolean('isQualify').notNullable().defaultTo('false');
         table.timestamp('created_at').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'))
