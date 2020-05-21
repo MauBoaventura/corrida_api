@@ -26,11 +26,12 @@ routes.post('/zerar/:id', StageController.zerar)
 
 // //Corrida
 /*
-    Header: idStage
+    Header: idStage, idRunner
 */
-routes.post('/chegada/:numero', RaceController.chegada)
-// routes.post('/qualifica/:id', SessionController.create)
-// routes.post('/desqualifica/:id', SessionController.create)
+routes.get('/corrida/:id', RaceController.get)
+routes.post('/corrida', RaceController.cadastrar)
+// routes.post('/qualifica', RaceController.qualifica)
+// routes.post('/desqualifica/:id', RaceController.qualifica)
 
 // //Relatorios
 // routes.get('/relatorio/geral', OngsController.index)

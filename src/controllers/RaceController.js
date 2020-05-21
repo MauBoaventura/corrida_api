@@ -21,26 +21,59 @@ module.exports = {
     async get(req, res) {
         const id = req.params.id;
 
-        const dados = await connection('stages')
+        const dados = await connection('race')
             .select("*")
             .where("id", id)
 
         res.json(dados)
     },
 
-    async chegada(req, res) {
+    async cadastrar(req, res) {
 
-        const stage_id = req.header('Authorization');
-        var numero = req.params.numero
+        const stage_id = req.header('idStage');
+        const runner_id = req.header('idRunner');
 
-        const [id] = await connection('stages').insert({
+        var { number = 0, km = 0, isQualify } = req.body
+
+
+        //Verifica se o id da etapa existe
+        const stage = await connection('stages')
+            .select("*")
+            .where("id", stage_id)
+            .first()
+
+        if (stage == undefined)
+            return res.status(401).json({
+                error: "Stage not exist"
+            })
+
+        //Verifica se o id do corredor existe
+        const runner = await connection('runners')
+            .select("*")
+            .where("id", runner_id)
+            .first()
+
+        if (runner == undefined)
+            return res.status(401).json({
+                error: "Runner not exist"
+            })
+
+
+        const [id] = await connection('race').insert({
             stage_id,
-            city,
-            uf,
+            runner_id,
+            km,
+            number,
+            isQualify
         })
 
+
         res.json({
-            id
+            id,
+            stage_id,
+            runner_id,
+            km,
+            number
         })
     },
 
@@ -51,7 +84,6 @@ module.exports = {
             .select("*")
             .where("id", id)
             .first()
-        console.log("Entrou aqui :" + stage)
 
         if (stage == undefined)
             return res.status(401).json({
