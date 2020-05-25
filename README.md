@@ -2,13 +2,13 @@
 
 Olá! Esta é uma API REST de gerencia de usuarios e etapas da corrida do Circuito Piauiense de Corridas na Natureza **(CPCN)**.
 
-Contém endpoints para cadastro de usuarios e etapas das corridas
+Contém endpoints para cadastro de usuarios e etapas das corridas além de funcionalidades da aplicação
 
 É uma API feita com Javascript (Node.js)
 
 ## Endpoints:
 
-Maioria são auto-explicativos
+**POSTMAN: https://documenter.getpostman.com/view/10582029/Szt8eVeA?version=latest**
 
 ### Runner
 
@@ -33,7 +33,7 @@ name, age, gender, email, whatsapp, city, uf.
 
 #### Modificar (PUT)
 
-- ALtera do banco de dados as informações de um corredor
+- Altera do banco de dados as informações de um corredor
 
 name, age, gender, email, whatsapp, city, uf.
 
@@ -61,8 +61,29 @@ name, city, uf
 
 #### Modificar (PUT)
 
-- ALtera do banco de dados as informações de uma etapa
+- Altera do banco de dados as informações de uma etapa
 
 name, city, uf
+
+
+### Race
+
+#### Cadastro (POST)
+
+- Informa qual a distancia o corredor vai competir
+
+km
+
+#### Lista um (GET)
+
+- Recupera do banco de dados as informações de um corredor na corrida
+
+#### Qualifica (PUT)
+
+- Qualifica o corredor na etapa e lhe atribui um numero
+
+#### Desqualifica (PUT)
+
+- Desqualifica o corredor na etapa 
 
 
