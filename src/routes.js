@@ -29,8 +29,8 @@ routes.delete('/quilometragem/:stage_id', MileageController.delete)
 
 // Tempo
 routes.get('/time/:id', StageController.time)
-routes.post('/inicio/:id', StageController.inicio)
-routes.post('/zerar/:id', StageController.zerar)
+routes.put('/inicio/:id', StageController.inicio)
+routes.put('/zerar/:id', StageController.zerar)
 
 // Corrida
 /*
@@ -39,7 +39,8 @@ routes.post('/zerar/:id', StageController.zerar)
 routes.get('/corrida/:id', RaceController.get)
 routes.post('/corrida', RaceController.cadastrar)
 routes.put('/qualifica', RaceController.qualifica)
-// routes.post('/desqualifica/:id', RaceController.qualifica)
+routes.put('/desqualifica', RaceController.desqualifica)
+routes.put('/chegada/:number', RaceController.chegada)
 
 // Relatorios
 // routes.get('/relatorio/geral', OngsController.index)

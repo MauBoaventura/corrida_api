@@ -30,14 +30,14 @@ module.exports = {
 
 
         //Verifica se o id da etapa existe
-        const race = await connection('race')
+        const stage = await connection('stages')
             .select("*")
             .where("id", stage_id)
             .first()
 
-        if (race == undefined)
+        if (stage == undefined)
             return res.status(401).json({
-                error: "race not exist"
+                error: "Stage not exist"
             })
 
         //Verifica se o id do corredor existe
@@ -115,14 +115,14 @@ module.exports = {
         const { number } = req.body
 
         //Verifica se o id da etapa existe
-        const race = await connection('race')
+        const stage = await connection('stages')
             .select("*")
             .where("id", stage_id)
             .first()
 
-        if (race == undefined)
+        if (stage == undefined)
             return res.status(401).json({
-                error: "Race not exist"
+                error: "Stage not exist"
             })
 
         //Verifica se o id do corredor existe
@@ -170,14 +170,14 @@ module.exports = {
         const runner_id = req.header('idRunner');
 
         //Verifica se o id da etapa existe
-        const race = await connection('race')
+        const stage = await connection('stages')
             .select("*")
             .where("id", stage_id)
             .first()
 
-        if (race == undefined)
+        if (stage == undefined)
             return res.status(401).json({
-                error: "Race not exist"
+                error: "Stage not exist"
             })
 
         //Verifica se o id do corredor existe
@@ -198,6 +198,44 @@ module.exports = {
             })
             .update({
                 number: 0, isQualify: false
+            })
+
+        res.json({
+            corrida
+        })
+
+    },
+
+    async chegada(req, res) {
+
+        const stage_id = req.header('idStage');
+        const number = req.params.number
+
+        //Verifica se o id da etapa existe
+        const race = await connection('race')
+            .select("*")
+            .where({ stage_id, number })
+            .first()
+
+        //Verifica se numero do corredor esta cadastrado na etapa 
+        if (race == undefined)
+            return res.status(401).json({
+                error: "Race not exist"
+            })
+
+        //Verifica se o corredor esta qualificado para correr
+        if (race.isQualify == false)
+            return res.status(401).json({
+                error: "Runner is not qualify"
+            })
+
+        //Atualiza no banco
+        let corrida = await connection('race')
+            .where({
+                id: race.id
+            })
+            .update({
+                totaltime: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')
             })
 
         res.json({
