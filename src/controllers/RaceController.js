@@ -58,7 +58,28 @@ module.exports = {
                 error: "Runner not exist"
             })
 
+        //Verifica se o km da etapa existe
+        let mileage = await connection('mileage')
+            .select("distance")
+            .where("stage_id", stage_id)
 
+        mileage = JSON.parse(JSON.stringify(mileage))
+        console.log(mileage)
+
+        let flag = true
+        for (let index = 0; index < mileage.length; index++) {
+            const element = mileage[index].distance;
+            if (element == km) {
+                console.log("Existe")
+                flag = false
+            }
+        }
+        if (flag)
+            return res.status(401).json({
+                error: "Mileage not exist"
+            })
+
+        //Insere no banco
         const [id] = await connection('race').insert({
             stage_id,
             runner_id,
@@ -70,8 +91,7 @@ module.exports = {
             id,
             stage_id,
             runner_id,
-            km,
-            number
+            km
         })
     },
 
