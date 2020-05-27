@@ -1,6 +1,7 @@
 const crypto = require('crypto')
 const moment = require('moment')
 const connection = require('../database/connection')
+const MileageController = require('../controllers/MileageController')
 
 module.exports = {
     async index(req, res) {
@@ -28,7 +29,7 @@ module.exports = {
         res.json(dados)
     },
 
-    async create(req, res) {
+    async create(req, res, next) {
         const {
             name,
             city,
@@ -40,6 +41,8 @@ module.exports = {
             city,
             uf,
         })
+
+        await salvar(req, res, id)
 
         res.json({
             id
@@ -97,7 +100,7 @@ module.exports = {
                 error: "Stage not exist"
             })
 
-            stage.created_at
+        stage.created_at
         res.status(200).json(stage)
 
     },
@@ -142,3 +145,19 @@ module.exports = {
     }
 
 };
+
+async function salvar(req, res, id) {
+    const stage_id = id;
+    console.log(stage_id)
+    const { distance, mileage = "km" } = req.body
+    for (let i = 0; i < distance.length; i++) {
+        let km = (distance[i])
+        let resp = await connection('mileage').insert({
+            stage_id,
+            distance: km,
+            mileage
+        })
+        console.log("Mileage: " + resp)
+    }
+
+}

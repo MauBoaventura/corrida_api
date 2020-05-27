@@ -4,27 +4,35 @@ const routes = express.Router()
 const RunnerController = require('./controllers/RunnerController')
 const StageController = require('./controllers/StageController')
 const RaceController = require('./controllers/RaceController')
+const MileageController = require('./controllers/MileageController')
 
-//Corredores
+// Corredores
 routes.get('/corredor', RunnerController.index)
 routes.get('/corredor/:id', RunnerController.get)
 routes.post('/corredor', RunnerController.create)
 routes.put('/corredor/:id', RunnerController.update)
 routes.delete('/corredor/:id', RunnerController.delete)
 
-//Etapas
+// Etapas
 routes.get('/etapa', StageController.index)
 routes.get('/etapa/:id', StageController.get)
 routes.post('/etapa', StageController.create)
 routes.put('/etapa/:id', StageController.update)
 routes.delete('/etapa/:id', StageController.delete)
 
-//Tempo
+// Configurações
+routes.get('/quilometragem', MileageController.index)
+routes.get('/quilometragem/:stage_id', MileageController.get)
+routes.post('/quilometragem', MileageController.create)
+routes.delete('/quilometragem/:stage_id', MileageController.delete)
+
+
+// Tempo
 routes.get('/time/:id', StageController.time)
 routes.post('/inicio/:id', StageController.inicio)
 routes.post('/zerar/:id', StageController.zerar)
 
-// //Corrida
+// Corrida
 /*
     Header: idStage, idRunner
 */
@@ -33,11 +41,10 @@ routes.post('/corrida', RaceController.cadastrar)
 // routes.post('/qualifica', RaceController.qualifica)
 // routes.post('/desqualifica/:id', RaceController.qualifica)
 
-// //Relatorios
+// Relatorios
 // routes.get('/relatorio/geral', OngsController.index)
 // routes.get('/relatorio/competidores', OngsController.index)
 // routes.get('/relatorio/categoria', OngsController.index)
-
 
 // routes.get('/profile', ProfileController.index)
 
