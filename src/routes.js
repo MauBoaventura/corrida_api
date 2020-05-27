@@ -38,7 +38,7 @@ routes.post('/zerar/:id', StageController.zerar)
 */
 routes.get('/corrida/:id', RaceController.get)
 routes.post('/corrida', RaceController.cadastrar)
-// routes.post('/qualifica', RaceController.qualifica)
+routes.put('/qualifica', RaceController.qualifica)
 // routes.post('/desqualifica/:id', RaceController.qualifica)
 
 // Relatorios
