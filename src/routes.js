@@ -5,6 +5,7 @@ const RunnerController = require('./controllers/RunnerController')
 const StageController = require('./controllers/StageController')
 const RaceController = require('./controllers/RaceController')
 const MileageController = require('./controllers/MileageController')
+const ReportController = require('./controllers/ReportController')
 
 // Corredores
 routes.get('/corredor', RunnerController.index)
@@ -43,9 +44,13 @@ routes.put('/desqualifica', RaceController.desqualifica)
 routes.put('/chegada/:number', RaceController.chegada)
 
 // Relatorios
-// routes.get('/relatorio/geral', OngsController.index)
-// routes.get('/relatorio/competidores', OngsController.index)
-// routes.get('/relatorio/categoria', OngsController.index)
+/*
+    Header: idStage, idRunner
+*/
+routes.get('/relatoriogeral', ReportController.geral)
+routes.get('/relatoriogeralquilometragem', ReportController.geral_quilometragem)
+// routes.get('/relatoriocompetidores', OngsController.index)
+// routes.get('/relatoriocategoria', OngsController.index)
 
 // routes.get('/profile', ProfileController.index)
 

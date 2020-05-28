@@ -88,26 +88,6 @@ module.exports = {
         })
     },
 
-    // async update(req, res) {
-    //     const id = req.params.id;
-
-    //     const race = await connection('race')
-    //         .select("*")
-    //         .where("id", id)
-    //         .first()
-
-    //     if (race == undefined)
-    //         return res.status(401).json({
-    //             error: "race not exist"
-    //         })
-
-    //     await connection('race').where("id", id).update(req.body)
-
-    //     res.status(204).send()
-
-    // },
-
-
     async qualifica(req, res) {
 
         const stage_id = req.header('idStage');
