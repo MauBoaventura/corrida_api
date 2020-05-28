@@ -220,7 +220,7 @@ module.exports = {
         //Verifica se numero do corredor esta cadastrado na etapa 
         if (race == undefined)
             return res.status(401).json({
-                error: "Race not exist"
+                error: "Number does not exist on stage"
             })
 
         //Verifica se o corredor esta qualificado para correr
@@ -229,18 +229,19 @@ module.exports = {
                 error: "Runner is not qualify"
             })
 
+        let now = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')
+        
         //Atualiza no banco
-        let corrida = await connection('race')
+        await connection('race')
             .where({
                 id: race.id
             })
             .update({
-                totaltime: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')
+                totaltime: now
             })
 
-        res.json({
-            corrida
-        })
+        race.totaltime = now
+        res.json(race)
 
     }
 
