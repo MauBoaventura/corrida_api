@@ -1,5 +1,6 @@
 const express = require('express')
 const routes = express.Router()
+const validator = require('express-validator')
 
 const RunnerController = require('./controllers/RunnerController')
 const StageController = require('./controllers/StageController')
@@ -10,7 +11,15 @@ const ReportController = require('./controllers/ReportController')
 // Corredores
 routes.get('/corredor', RunnerController.index)
 routes.get('/corredor/:id', RunnerController.get)
-routes.post('/corredor', RunnerController.create)
+routes.post('/corredor', [
+    validator.check('email').isEmail().withMessage('Is not a valid format!'),
+    validator.check('age').isISO8601().toDate(),
+    validator.check('gender').isIn(['Female', 'Male']),
+    validator.check('whatsapp').customSanitizer(value => {
+        return value.split("").filter(n => (Number(n) || n == 0)).join("");
+    }),
+
+], RunnerController.create)
 routes.put('/corredor/:id', RunnerController.update)
 routes.delete('/corredor/:id', RunnerController.delete)
 

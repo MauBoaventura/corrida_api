@@ -1,5 +1,6 @@
 const crypto = require('crypto')
 const connection = require('../database/connection')
+const express_validator = require('express-validator')
 
 module.exports = {
     async index(req, res) {
@@ -28,6 +29,10 @@ module.exports = {
     },
 
     async create(req, res) {
+        const errors = express_validator.validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
         const {
             name,
             age,
@@ -36,21 +41,31 @@ module.exports = {
             whatsapp,
             city,
             uf,
+            password
         } = req.body
 
-        const [id] = await connection('runners').insert({
-            name,
-            age,
-            gender,
-            email,
-            whatsapp,
-            city,
-            uf,
-        })
+        try {
 
-        res.json({
-            id
-        })
+            const [id] = await connection('runners').insert({
+                name,
+                age,
+                gender,
+                email,
+                whatsapp,
+                city,
+                uf,
+                password
+            })
+
+            res.json({
+                id
+            })
+        } catch (error) {
+            res.json({
+                error
+            })
+        }
+
     },
 
     async delete(req, res) {
