@@ -3,18 +3,10 @@ const connection = require('../database/connection')
 const express_validator = require('express-validator')
 
 module.exports = {
-    async index(req, res) {
-        const {
-            page = 1
-        } = req.query
-
+    async index(req, res) {       
         const [count] = await connection('runners').count()
         const dados = await connection('runners')
-            .limit(5)
-            .offset((page - 1) * 5)
             .select("*")
-        res.header('X-Total-Count', count['count(*)'])
-        console.log(dados)
         res.json(dados)
     },
 
@@ -75,7 +67,6 @@ module.exports = {
             .select("*")
             .where("id", id)
             .first()
-        console.log(runner)
 
         if (runner == undefined)
             return res.status(401).json({
@@ -99,11 +90,14 @@ module.exports = {
             return res.status(401).json({
                 error: "Runner not exist"
             })
-
-        await connection('runners').where("id", id).update(req.body)
-
-        res.status(204).send()
-
+        try {
+            await connection('runners').where("id", id).update(req.body)
+            res.status(204).send()
+        } catch (error) {
+            res.json({
+                error
+            })
+        }
     }
 
 };

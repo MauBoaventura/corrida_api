@@ -23,7 +23,6 @@ module.exports = {
 
     async create(req, res, next) {
         const stage_id = req.header('idStage');
-        console.log(stage_id)
         const { distance, mileage = "km" } = req.body
         for (let i = 0; i < distance.length; i++) {
             let km = (distance[i])
@@ -32,7 +31,6 @@ module.exports = {
                 distance: km,
                 mileage
             })
-            console.log("Mileage: " + resp)
         }
         res.status(200).send()
 

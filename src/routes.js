@@ -46,6 +46,7 @@ routes.put('/zerar/:id', StageController.zerar)
 /*
     Header: idStage, idRunner
 */
+routes.get('/corrida', RaceController.index)
 routes.get('/corrida/:id', RaceController.get)
 routes.post('/corrida', RaceController.cadastrar)
 routes.put('/qualifica', RaceController.qualifica)
@@ -58,6 +59,7 @@ routes.put('/chegada/:number', RaceController.chegada)
 */
 routes.get('/relatoriogeral', ReportController.geral)
 routes.get('/relatoriogeralquilometragem', ReportController.geral_quilometragem)
+routes.get('/relatoriogeralgenero', ReportController.geral_gender)
 // routes.get('/relatoriocompetidores', OngsController.index)
 // routes.get('/relatoriocategoria', OngsController.index)
 

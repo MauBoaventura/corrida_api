@@ -57,19 +57,28 @@ module.exports = {
             .where("stage_id", stage_id)
 
         mileage = JSON.parse(JSON.stringify(mileage))
-        console.log(mileage)
 
         let flag = true
         for (let index = 0; index < mileage.length; index++) {
             const element = mileage[index].distance;
             if (element == km) {
-                console.log("Existe")
                 flag = false
             }
         }
         if (flag)
             return res.status(401).json({
                 error: "Mileage not exist"
+            })
+
+        //Verificar se o corredor já esta cadastrado na etapa
+        let race = await connection('race')
+            .select("*")
+            .where({ stage_id, runner_id })
+            .first()
+
+        if (race != undefined)
+            return res.status(401).json({
+                error: "Runner already exist on stage"
             })
 
         //Insere no banco
@@ -130,6 +139,20 @@ module.exports = {
                 error: "Number already used"
             })
 
+        //Verificar se o corredor já esta cadastrado na etapa
+        let race = await connection('race')
+            .select("*")
+            .where({ stage_id, runner_id })
+            .first()
+
+        race = JSON.parse(JSON.stringify(race))
+
+        if (race.number != null)
+            return res.status(401).json({
+                error: "Runner already have a number on stage"
+            })
+
+
         //Atualiza no banco
         let corrida = await connection('race')
             .where({
@@ -177,7 +200,7 @@ module.exports = {
                 runner_id, stage_id
             })
             .update({
-                number: 0, isQualify: false
+                number: null, isQualify: false
             })
 
         res.json({
@@ -210,7 +233,7 @@ module.exports = {
             })
 
         let now = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')
-        
+
         //Atualiza no banco
         await connection('race')
             .where({

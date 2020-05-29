@@ -56,7 +56,6 @@ module.exports = {
             .select("*")
             .where("id", id)
             .first()
-        console.log("Entrou aqui :" + stage)
 
         if (stage == undefined)
             return res.status(401).json({
@@ -148,7 +147,6 @@ module.exports = {
 
 async function salvar(req, res, id) {
     const stage_id = id;
-    console.log(stage_id)
     const { distance, mileage = "km" } = req.body
     for (let i = 0; i < distance.length; i++) {
         let km = (distance[i])
@@ -157,7 +155,6 @@ async function salvar(req, res, id) {
             distance: km,
             mileage
         })
-        console.log("Mileage: " + resp)
     }
 
 }
