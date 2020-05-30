@@ -7,6 +7,7 @@ Contém endpoints para cadastro de usuarios e etapas das corridas além de funci
 É uma API feita com Javascript (Node.js)
 
 **POSTMAN: https://documenter.getpostman.com/view/10582029/Szt8eVeA?version=latest**
+
 **Heroku: https://apicorrida.herokuapp.com/**
 
 ## Endpoints:
