@@ -11,49 +11,23 @@ module.exports = {
       database: 'corrida',
       timezone: 'utc'
     },
-    // pool: {
-    //   min: 2,
-    //   max: 10,
-    //   afterCreate: function (conn, cb) {
-    //     conn.query('SET timezone="UTC";', function (err) {
-    //       cb(err, conn);
-    //     });
-    //   }
-    // },
     migrations: {
       directory: './src/database/migrations'
     }
   },
 
-  staging: {
-    client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user: 'username',
-      password: 'password'
-    },
-    pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      tableName: 'knex_migrations'
-    }
-  },
-
   production: {
-    client: 'postgresql',
+    client: 'mysql',
     connection: {
-      database: 'my_db',
-      user: 'username',
-      password: 'password'
-    },
-    pool: {
-      min: 2,
-      max: 10
+      database: 'heroku_2d5130b8f8fafc2',
+      host: 'us-cdbr-east-05.cleardb.net',
+      user: 'b319737a1cb84b',
+      password: 'd941d1ae',
+      timezone: 'utc'
+
     },
     migrations: {
-      tableName: 'knex_migrations'
+      directory: './src/database/migrations'
     }
   },
 

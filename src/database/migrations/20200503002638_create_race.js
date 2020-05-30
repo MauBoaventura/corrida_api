@@ -15,7 +15,7 @@ exports.up = function (knex, Promise) {
         table.datetime('totaltime')
         table.boolean('isQualify').notNullable().defaultTo('false');
         table.timestamp('created_at').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'))
-        table.timestamp('updated_at').defaultTo(knex.raw('NULL ON UPDATE CURRENT_TIMESTAMP'))
+        // table.timestamp('updated_at').defaultTo(knex.raw('NULL ON UPDATE CURRENT_TIMESTAMP'))
 
     })
 

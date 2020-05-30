@@ -8,7 +8,7 @@ exports.up = function (knex, Promise) {
         table.string('uf');
         table.datetime('start');
         table.timestamp('created_at').notNullable().defaultTo(knex.raw('now()'))
-        table.timestamp('updated_at').defaultTo(knex.raw('NULL ON UPDATE now()'))
+        // table.timestamp('updated_at').defaultTo(knex.raw('NULL ON UPDATE now()'))
 
     })
 };
