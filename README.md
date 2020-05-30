@@ -6,9 +6,10 @@ Contém endpoints para cadastro de usuarios e etapas das corridas além de funci
 
 É uma API feita com Javascript (Node.js)
 
-## Endpoints:
-
 **POSTMAN: https://documenter.getpostman.com/view/10582029/Szt8eVeA?version=latest**
+**Heroku: https://apicorrida.herokuapp.com/**
+
+## Endpoints:
 
 ### Runner
 
@@ -74,6 +75,10 @@ name, city, uf
 
 km
 
+#### Lista todos (GET)
+
+- Recupera do banco de dados as informações de todos os corredor na corrida
+
 #### Lista um (GET)
 
 - Recupera do banco de dados as informações de um corredor na corrida
@@ -85,5 +90,24 @@ km
 #### Desqualifica (PUT)
 
 - Desqualifica o corredor na etapa 
+
+#### Chegada (PUT)
+
+- Coloca o tempo do corredor na etapa 
+
+
+### Relatórios
+
+#### Todos corredores (GET)
+
+- Recupera do banco de dados as informações de todos os corredor na corrida para exibição do resultado
+
+#### Todos corredores por quilometragem (GET)
+
+- Recupera do banco de dados as informações de todos os corredor na corrida para exibição do resultado
+
+#### Todos corredores por genero (GET)
+
+- Recupera do banco de dados as informações de todos os corredor na corrida para exibição do resultado
 
 
