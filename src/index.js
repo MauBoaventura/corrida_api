@@ -26,7 +26,7 @@ function normalizePort(val) {
     return false;
 }
 
-var port = normalizePort(process.env.PORT || '3030');
+var port = normalizePort(process.env.PORT || '3001');
 
 //Poe o servidor para rodar ma porta especificada
 app.listen(port, function () {
