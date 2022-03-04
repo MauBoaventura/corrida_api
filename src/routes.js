@@ -9,7 +9,7 @@ const MileageController = require('./controllers/MileageController')
 const ReportController = require('./controllers/ReportController')
 
 routes.get('/', (req, res) => {
-    res.send('API online!');
+    res.send('API corrida_api online!');
 })
 
 // Corredores
