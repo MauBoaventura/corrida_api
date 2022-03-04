@@ -20,7 +20,7 @@ jobs:
           cd ~/containers
           git clone https://github.com/${{ github.repository_owner }}/${{ github.event.repository.name }}.git
           cd ${{ github.event.repository.name }}
-          git pull origin ${{GITHUB_REF_NAME}}
+          git pull origin ${{env.GITHUB_REF_NAME}}
           [ ! -f .env ] && ~/containers/set_incremental_port.sh # Cria o .env usando como modelo o que está no servidor
           docker-compose config
           docker-compose down --rmi all
